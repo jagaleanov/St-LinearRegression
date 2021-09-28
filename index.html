@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Estadística</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!--JS-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+    <div class="fluid-container">
+        <nav class="avbar navbar-dark bg-dark navbar-expand-lg">
+            <h1 class="navbar-brand mx-4">Estadística</h1>
+        </nav>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Calculo de la media, moda y mediana de un conjunto de números</h5>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="quantDataTxt">Cuantos datos desea analizar</label>
+                            <input type="number" name="quantDataTxt" id="quantDataTxt" class="form-control" value=""
+                                autocomplete="off" required>
+                        </div>
+                        <input type="button" class="btn btn-primary btn-block" value="Ingresar datos"
+                            onclick="inQuantData()">
+                        <div id="listFields">
+                        </div>
+                        <input type="button" class="btn btn-danger btn-block" value="Mostrar resultados"
+                            onclick="saveData()">
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Media aritmética</strong>: <span id="mediaString"></span></p>
+                        <p><strong>Moda</strong>: <span id="modaString"></span></p>
+                        <p><strong>Mediana</strong>: <span id="medianaString"></span></p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
