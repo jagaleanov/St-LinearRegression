@@ -15,31 +15,91 @@
 
 <body>
     <div class="fluid-container">
-        <nav class="avbar navbar-dark bg-dark navbar-expand-lg">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
             <h1 class="navbar-brand mx-4">Estadística</h1>
         </nav>
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Calculo de la media, moda y mediana de un conjunto de números</h5>
+                <h1 class="card-title">Tabla de frecuencias</h1>
                 <div class="row mt-4">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="quantDataTxt">Cuantos datos desea analizar</label>
                             <input type="number" name="quantDataTxt" id="quantDataTxt" class="form-control" value=""
                                 autocomplete="off" required>
                         </div>
+                        <div class="form-group">
+                            <label for="quantIntervalTxt">En cuantos intervalos desea analizar</label>
+                            <input type="number" name="quantIntervalTxt" id="quantIntervalTxt" class="form-control"
+                                value="" autocomplete="off" required>
+                        </div>
+
                         <input type="button" class="btn btn-primary btn-block" value="Ingresar datos"
                             onclick="inQuantData()">
+
+                        <div id="typeDiv" class="mt-3">
+                            <label>Tipo de varianza</label>
+                            <div class="form-group">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="type" id="populationType"
+                                        value="population">
+                                    <label class="form-check-label" for="populationType"> Población </label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="type" id="sampleType"
+                                        value="sample">
+                                    <label class="form-check-label" for="sampleType"> Muestra </label>
+                                </div>
+                            </div>
+                        </div>
                         <div id="listFields">
                         </div>
-                        <input type="button" class="btn btn-danger btn-block" value="Mostrar resultados"
+                        <input type="button" id="resBtn" class="btn btn-danger btn-block" value="Mostrar resultados"
                             onclick="saveData()">
                     </div>
-                    <div class="col-md-6">
-                        <p><strong>Media aritmética</strong>: <span id="mediaString"></span></p>
-                        <p><strong>Moda</strong>: <span id="modaString"></span></p>
-                        <p><strong>Mediana</strong>: <span id="medianaString"></span></p>
+                    <div id="resCol" class="col-md-8">
+                        <h2>Resultados</h2>
+                        
+                        <h6>Listado ascendente</h6>
+                        <p id="listString"></p>
+
+                        <h6>Media</h6>
+                        <p id="mediaString"></p>
+
+                        <h6>Moda</h6>
+                        <p id="modaString"></p>
+
+                        <h6>Mediana</h6>
+                        <p id="medianaString"></p>
+
+                        <h6>Tabla de frecuencias</h6>
+                        <table class="table table-bordered table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Intervalo</th>
+                                    <th>Promedio intervalo</th>
+                                    <th>Frecuencia</th>
+                                </tr>
+                            </thead>
+                            <tbody id="freqTable">
+
+                            </tbody>
+                        </table>
+
+                        <h6>Media de las frecuencias</h6>
+                        <p id="xMediaString"></p>
+
+                        <h6>Varianza</h6>
+                        <p id="varianzaString"></p>
+
+                        <h6>Desviación estandar</h6>
+                        <p id="desviacionString"></p>
+
+                        <h6>Coeficiente de variación</h6>
+                        <p id="cvarString"></p>
+
                     </div>
                 </div>
 
