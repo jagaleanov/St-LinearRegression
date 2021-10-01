@@ -191,6 +191,7 @@ function inQuantData() {
         $('#quantIntervalTxt').attr("readonly", true);
         $('#typeDiv').show();
         $('#resBtn').show();
+        $('#inBtn').attr("disabled", true);
     }
 }
 
