@@ -3,110 +3,235 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Estadística</title>
+    <title>Proyecto final - Estadística</title>
 
     <!--CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 
     <!--JS-->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="http://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="http://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="http://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 </head>
 
 <body>
     <div class="fluid-container">
         <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-            <h1 class="navbar-brand mx-4">Estadística</h1>
+            <h1 class="navbar-brand mx-4">Proyecto final - Estadística - UDFJC</h1>
+            <small class="text-light">Jorge Alberto Galeano Vélez - 20172020060 & José Alejandro Cortazar López - 20181020022</small>
+            
         </nav>
 
         <div class="card">
             <div class="card-body">
-                <h1 class="card-title">Tabla de frecuencias</h1>
+                <h1 class="card-title">Pronóstico de una variable a través de los meses</h1>
                 <div class="row mt-4">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="form-group">
-                            <label for="quantDataTxt">Cuantos datos desea analizar</label>
+                            <label for="quantDataTxt">Cantidad de meses a analizar</label>
                             <input type="number" name="quantDataTxt" id="quantDataTxt" class="form-control" value=""
                                 autocomplete="off" required>
                         </div>
                         <div class="form-group">
-                            <label for="quantIntervalTxt">En cuantos intervalos desea analizar</label>
-                            <input type="number" name="quantIntervalTxt" id="quantIntervalTxt" class="form-control"
-                                value="" autocomplete="off" required>
+                            <label for="firstMonthTxt">Seleccione el mes inicial</label>
+
+                            <select name="firstMonthTxt" id="firstMonthTxt" class="form-control">
+                                <option value="0">Enero</option>
+                                <option value="1">Febrero</option>
+                                <option value="2">Marzo</option>
+                                <option value="3">Abril</option>
+                                <option value="4">Mayo</option>
+                                <option value="5">Junio</option>
+                                <option value="6">Julio</option>
+                                <option value="7">Agosto</option>
+                                <option value="8">Septiembre</option>
+                                <option value="9">Octubre</option>
+                                <option value="10">Noviembre</option>
+                                <option value="11">Diciembre</option>
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="yearTxt">Seleccione el año inicial</label>
+
+                            <select name="yearTxt" id="yearTxt" class="form-control">
+                                <option value="2010">2010</option>
+                                <option value="2011">2011</option>
+                                <option value="2012">2012</option>
+                                <option value="2013">2013</option>
+                                <option value="2014">2014</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020" selected>2020</option>
+                                <option value="2021">2021</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="intervalTxt">Seleccione el intervalo para la tabla de frecuencias</label>
+
+                            <select name="intervalTxt" id="intervalTxt" class="form-control">
+                                <option value="Bimensual">Bimensual</option>
+                                <option value="Trimestral">Trimestral</option>
+                                <option value="Semestral">Semestral</option>
+                            </select>
                         </div>
 
                         <input type="button" id="inBtn" class="btn btn-primary btn-block" value="Iniciar"
                             onclick="inQuantData()">
+                    </div>
+                    <div id="resCol" class="col-md-10">
 
-                        <div id="typeDiv" class="mt-3">
-                            <label>Tipo de varianza</label>
-                            <div class="form-group">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="type" id="populationType"
-                                        value="population">
-                                    <label class="form-check-label" for="populationType"> Población </label>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                    aria-controls="home" aria-selected="true">Entrada de datos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="mids-tab" data-toggle="tab" href="#mids" role="tab"
+                                    aria-controls="mids" aria-selected="true">Media, moda y mediana</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="freq-tab" data-toggle="tab" href="#freq" role="tab"
+                                    aria-controls="freq" aria-selected="false">Agrupación de frecuencias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="reg-tab" data-toggle="tab" href="#reg" role="tab"
+                                    aria-controls="reg" aria-selected="false">Regresión lineal</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active p-5 " id="home" role="tabpanel"
+                                aria-labelledby="home-tab">
+
+                                <div id="typeDiv" class="mt-3">
+                                    <h3>Tipo de varianza</h3>
+                                    <div class="form-group">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="typeTxt"
+                                                id="populationTypeTxt" value="population">
+                                            <label class="form-check-label" for="populationTypeTxt"> Población </label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="typeTxt"
+                                                id="sampleTypeTxt" value="sample">
+                                            <label class="form-check-label" for="sampleTypeTxt"> Muestra </label>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="type" id="sampleType"
-                                        value="sample">
-                                    <label class="form-check-label" for="sampleType"> Muestra </label>
+                                <h3>Datos por mes</h3>
+                                <div id="listFields" class="row">
+                                </div>
+                                <input type="button" id="resBtn" class="btn btn-danger btn-block"
+                                    value="Ingresar y calcular" onclick="saveData()">
+                            </div>
+                            <div class="tab-pane fade p-5 " id="mids" role="tabpanel" aria-labelledby="mids-tab">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h3>Media aritmética</h3>
+                                        <p id="mediaString"></p>
+
+                                        <h3>Moda</h3>
+                                        <p id="modaString"></p>
+
+                                        <h3>Mediana</h3>
+                                        <p id="medianaString"></p>
+
+                                        <h3>Lista inicial</h3>
+                                        <p id="listString"></p>
+
+                                        <h3>Lista ascendente</h3>
+                                        <p id="orderListString"></p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h3>Diagrama mensual</h3>
+                                        <div id="lineChartDiv"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade p-5" id="freq" role="tabpanel" aria-labelledby="freq-tab">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3>Tabla de frecuencias</h3>
+                                        <!--  
+                                            Programa desarrollado por 
+                                            Jorge Alberto Galeano Vélez - 20172020060 
+                                                            &
+                                             José Alejandro Cortazar López - 20181020022
+
+                                             Universidad Distrital Francisco Jsoe de Caldas
+                                             FAcultad de ingenieria
+                                             2021
+                                             cc by-nc
+                                        --> 
+                                        <table class="table table-bordered table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Intervalo</th>
+                                                    <th>Promedio intervalo</th>
+                                                    <th>Frecuencia</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="freqTable">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3>Diagrama de intervalos</h3>
+                                        <div id="colChartDiv"></div>
+
+                                        <h3>Media de las frecuencias</h3>
+                                        <p id="xMediaString"></p>
+
+                                        <h3>Varianza</h3>
+                                        <p id="varianzaString"></p>
+
+                                        <h3>Desviación estandar</h3>
+                                        <p id="desviacionString"></p>
+
+                                        <h3>Coeficiente de variación</h3>
+                                        <p id="cvarString"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade p-5" id="reg" role="tabpanel" aria-labelledby="reg-tab"><!--Programa desarrollado por Jorge Alberto Galeano Vélez - 20172020060 José Alejandro Cortazar López - 20181020022
+
+                                 Universidad Distrital Francisco Jsoe de Caldas FAcultad de ingenieria  2021  cc-by-nc
+                            --> 
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3>Coeficiente de correlación lineal</h3>
+                                        <div id="correlationString"></div>
+                                        
+                                        <h3>Pronóstico del promedio para el siguiente intervalo</h3>
+                                        <div id="nextMonthString"></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3>Regresión lineal (mínimos cuadrados)</h3>
+                                        <div id="scatterChartDiv"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="listFields">
-                        </div>
-                        <input type="button" id="resBtn" class="btn btn-danger btn-block" value="Igresar y calcular"
-                            onclick="saveData()">
-                    </div>
-                    <div id="resCol" class="col-md-8">
-                        <h2>Resultados</h2>
-                        
-                        <h6>Listado ascendente</h6>
-                        <p id="listString"></p>
-
-                        <h6>Media</h6>
-                        <p id="mediaString"></p>
-
-                        <h6>Moda</h6>
-                        <p id="modaString"></p>
-
-                        <h6>Mediana</h6>
-                        <p id="medianaString"></p>
-
-                        <h6>Tabla de frecuencias</h6>
-                        <table class="table table-bordered table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Intervalo</th>
-                                    <th>Promedio intervalo</th>
-                                    <th>Frecuencia</th>
-                                </tr>
-                            </thead>
-                            <tbody id="freqTable">
-
-                            </tbody>
-                        </table>
-
-                        <h6>Media de las frecuencias</h6>
-                        <p id="xMediaString"></p>
-
-                        <h6>Varianza</h6>
-                        <p id="varianzaString"></p>
-
-                        <h6>Desviación estandar</h6>
-                        <p id="desviacionString"></p>
-
-                        <h6>Coeficiente de variación</h6>
-                        <p id="cvarString"></p>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
     <script src="js/script.js"></script>
 </body>
