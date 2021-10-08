@@ -527,9 +527,9 @@ function printScatterChartDiv() {
         arrow.horizontalCenter = "middle";
         arrow.verticalCenter = "middle";
         arrow.strokeWidth = 0;
-        arrow.fill = chart.colors.getIndex(0);
-        arrow.direction = "bottom";
-        arrow.width = 12;
+        arrow.fill = am4core.color("red");;
+        arrow.direction = "top";
+        arrow.width = 5;
         arrow.height = 12;
 
         //add the trendlines
