@@ -330,6 +330,9 @@ function saveData() {
         $('#varianzaString').html(stats.variance());
         $('#desviacionString').html(stats.standardDeviation());
         $('#cvarString').html(stats.coefficientVariation() + ' = ' + (stats.coefficientVariation() * 100).toFixed(3) + '%');
+        
+        $('#mbString').html('m = '+stats.m+'<br> b = '+stats.b.toFixed(3));
+        $('#eqString').html('f(x) = '+stats.m.toFixed(3)+' x + '+stats.b.toFixed(3));
         $('#myTab a[href="#mids"]').tab('show');
     }
 }
