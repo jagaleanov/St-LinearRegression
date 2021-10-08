@@ -502,10 +502,7 @@ function printScatterChartDiv() {
                 "ay": stats.freqTable[i][PROM],
             });
         }
-        chart.data.push({
-            "bx": stats.freqTable.length,
-            "by": stats.funcX(stats.freqTable.length),
-        });
+
 
         // Create axes
         var valueAxisX = chart.xAxes.push(new am4charts.ValueAxis());
@@ -522,11 +519,6 @@ function printScatterChartDiv() {
         lineSeries.dataFields.valueX = "ax";
         lineSeries.strokeOpacity = 0;
 
-        var lineSeries2 = chart.series.push(new am4charts.LineSeries());
-        lineSeries2.dataFields.valueY = "by";
-        lineSeries2.dataFields.valueX = "bx";
-        lineSeries2.strokeOpacity = 0;
-
         // Add a bullet
         var bullet = lineSeries.bullets.push(new am4charts.Bullet());
 
@@ -539,20 +531,6 @@ function printScatterChartDiv() {
         arrow.direction = "bottom";
         arrow.width = 12;
         arrow.height = 12;
-
-        // Add a bullet
-        var bullet2 = lineSeries2.bullets.push(new am4charts.Bullet());
-        
-        // Add a triangle to act as am arrow
-        var arrow2 = bullet2.createChild(am4core.Triangle);
-        arrow2.horizontalCenter = "middle";
-        arrow2.verticalCenter = "middle";
-        arrow2.rotation = 180;
-        arrow2.strokeWidth = 0;
-        arrow2.fill = am4core.color("red");
-        arrow2.direction = "bottom";
-        arrow2.width = 12;
-        arrow2.height = 12;
 
         //add the trendlines
         var trend = chart.series.push(new am4charts.LineSeries());
