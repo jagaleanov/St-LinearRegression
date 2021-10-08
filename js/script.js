@@ -530,7 +530,7 @@ function printScatterChartDiv() {
         arrow.fill = am4core.color("red");;
         arrow.direction = "top";
         arrow.width = 5;
-        arrow.height = 12;
+        arrow.height = 7;
 
         //add the trendlines
         var trend = chart.series.push(new am4charts.LineSeries());
