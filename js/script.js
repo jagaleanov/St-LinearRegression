@@ -85,7 +85,7 @@ class Stats {
         //this.intervals = interval
 
         switch (intervalSize) {
-            case 'Bimensual':
+            case 'Bimestral':
                 this.intervalSize = 2;
                 break;
             case 'Trimestral':
