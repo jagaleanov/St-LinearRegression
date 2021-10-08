@@ -85,6 +85,9 @@ class Stats {
         //this.intervals = interval
 
         switch (intervalSize) {
+            case 'Mensual':
+                this.intervalSize = 1;
+                break;
             case 'Bimestral':
                 this.intervalSize = 2;
                 break;
@@ -93,6 +96,9 @@ class Stats {
                 break;
             case 'Semestral':
                 this.intervalSize = 6;
+                break;
+            case 'Anueal':
+                this.intervalSize = 12;
                 break;
         }
 
@@ -245,12 +251,16 @@ class Stats {
 function inQuantData() {
     if ($('#quantDataTxt').val() == '') {
         alert("Ingrese la cantidad de meses a analizar");
-    } else if ($('#intervalTxt').val() == 'Semestral' && (parseInt($('#quantDataTxt').val()) % 6 > 0 || parseInt($('#quantDataTxt').val())<12)) {
-        alert("Para un intervalo semestral un número multiplo de 6 mayor a 12.");
-    } else if ($('#intervalTxt').val() == 'Trimestral' && (parseInt($('#quantDataTxt').val()) % 3 > 0 || parseInt($('#quantDataTxt').val())<6)) {
-        alert("Para un intervalo trimestral un número multiplo de 3 mayor a 6.");
-    } else if ($('#intervalTxt').val() == 'Bimestral' && (parseInt($('#quantDataTxt').val()) % 2 > 0 || parseInt($('#quantDataTxt').val())<4)) {
-        alert("Para un intervalo bimestral un número multiplo de 2 mayor a 4.");
+    } else if ($('#intervalTxt').val() == 'Anueal' && (parseInt($('#quantDataTxt').val()) % 12 > 0 || parseInt($('#quantDataTxt').val()) < 24)) {
+        alert("Para un intervalo anual un número multiplo de 12 mayor o igual a 24.");
+    } else if ($('#intervalTxt').val() == 'Semestral' && (parseInt($('#quantDataTxt').val()) % 6 > 0 || parseInt($('#quantDataTxt').val()) < 12)) {
+        alert("Para un intervalo semestral un número multiplo de 6 mayor o igual a 12.");
+    } else if ($('#intervalTxt').val() == 'Trimestral' && (parseInt($('#quantDataTxt').val()) % 3 > 0 || parseInt($('#quantDataTxt').val()) < 6)) {
+        alert("Para un intervalo trimestral un número multiplo de 3 mayor o igual a 6.");
+    } else if ($('#intervalTxt').val() == 'Bimestral' && (parseInt($('#quantDataTxt').val()) % 2 > 0 || parseInt($('#quantDataTxt').val()) < 4)) {
+        alert("Para un intervalo bimestral un número multiplo de 2 mayor o igual a 4.");
+    } else if ($('#intervalTxt').val() == 'Mensual' && (parseInt($('#quantDataTxt').val()) < 2)) {
+        alert("Para un intervalo mensual un número  mayor o igual a 2.");
     } else {
         stats.quantData = parseInt($('#quantDataTxt').val());
         stats.firstMonth = parseInt($('#firstMonthTxt').val());
@@ -330,9 +340,9 @@ function saveData() {
         $('#varianzaString').html(stats.variance());
         $('#desviacionString').html(stats.standardDeviation());
         $('#cvarString').html(stats.coefficientVariation() + ' = ' + (stats.coefficientVariation() * 100).toFixed(3) + '%');
-        
-        $('#mbString').html('m = '+stats.m+'<br> b = '+stats.b.toFixed(3));
-        $('#eqString').html('f(x) = '+stats.m.toFixed(3)+' x + '+stats.b.toFixed(3));
+
+        $('#mbString').html('m = ' + stats.m + '<br> b = ' + stats.b.toFixed(3));
+        $('#eqString').html('f(x) = ' + stats.m.toFixed(3) + ' x + ' + stats.b.toFixed(3));
         $('#myTab a[href="#mids"]').tab('show');
     }
 }
@@ -492,6 +502,10 @@ function printScatterChartDiv() {
                 "ay": stats.freqTable[i][PROM],
             });
         }
+        chart.data.push({
+            "bx": stats.freqTable.length,
+            "by": stats.funcX(stats.freqTable.length),
+        });
 
         // Create axes
         var valueAxisX = chart.xAxes.push(new am4charts.ValueAxis());
@@ -508,6 +522,11 @@ function printScatterChartDiv() {
         lineSeries.dataFields.valueX = "ax";
         lineSeries.strokeOpacity = 0;
 
+        var lineSeries2 = chart.series.push(new am4charts.LineSeries());
+        lineSeries2.dataFields.valueY = "by";
+        lineSeries2.dataFields.valueX = "bx";
+        lineSeries2.strokeOpacity = 0;
+
         // Add a bullet
         var bullet = lineSeries.bullets.push(new am4charts.Bullet());
 
@@ -520,6 +539,20 @@ function printScatterChartDiv() {
         arrow.direction = "bottom";
         arrow.width = 12;
         arrow.height = 12;
+
+        // Add a bullet
+        var bullet2 = lineSeries2.bullets.push(new am4charts.Bullet());
+        
+        // Add a triangle to act as am arrow
+        var arrow2 = bullet2.createChild(am4core.Triangle);
+        arrow2.horizontalCenter = "middle";
+        arrow2.verticalCenter = "middle";
+        arrow2.rotation = 180;
+        arrow2.strokeWidth = 0;
+        arrow2.fill = am4core.color("red");
+        arrow2.direction = "bottom";
+        arrow2.width = 12;
+        arrow2.height = 12;
 
         //add the trendlines
         var trend = chart.series.push(new am4charts.LineSeries());
