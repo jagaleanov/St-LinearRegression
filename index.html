@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Proyecto final - Estadística</title>
 
     <!--CSS-->
@@ -22,14 +23,17 @@
     <script src="http://cdn.amcharts.com/lib/4/core.js"></script>
     <script src="http://cdn.amcharts.com/lib/4/charts.js"></script>
     <script src="http://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+
 </head>
 
 <body>
     <div class="fluid-container">
         <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
             <h1 class="navbar-brand mx-4">Proyecto final - Estadística - UDFJC</h1>
-            <small class="text-light">Jorge Alberto Galeano Vélez - 20172020060 & José Alejandro Cortazar López - 20181020022</small>
-            
+            <small class="text-light">Jorge Alberto Galeano Vélez - 20172020060 & José Alejandro Cortazar López -
+                20181020022</small>
+
         </nav>
 
         <div class="card">
@@ -142,6 +146,12 @@
                             <div class="tab-pane fade p-5 " id="mids" role="tabpanel" aria-labelledby="mids-tab">
                                 <div class="row">
                                     <div class="col-md-4">
+                                        <h3>Lista inicial</h3>
+                                        <p id="listString"></p>
+
+                                        <h3>Lista ascendente</h3>
+                                        <p id="orderListString"></p>
+
                                         <h3>Media aritmética</h3>
                                         <p id="mediaString"></p>
 
@@ -150,12 +160,6 @@
 
                                         <h3>Mediana</h3>
                                         <p id="medianaString"></p>
-
-                                        <h3>Lista inicial</h3>
-                                        <p id="listString"></p>
-
-                                        <h3>Lista ascendente</h3>
-                                        <p id="orderListString"></p>
                                     </div>
                                     <div class="col-md-8">
                                         <h3>Diagrama mensual</h3>
@@ -178,7 +182,7 @@
                                              Facultad de ingenieria
                                              2021
                                              cc by-nc
-                                        --> 
+                                        -->
                                         <table class="table table-bordered table-sm">
                                             <thead>
                                                 <tr>
@@ -209,21 +213,22 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade p-5" id="reg" role="tabpanel" aria-labelledby="reg-tab"><!--Programa desarrollado por Jorge Alberto Galeano Vélez - 20172020060 José Alejandro Cortazar López - 20181020022
+                            <div class="tab-pane fade p-5" id="reg" role="tabpanel" aria-labelledby="reg-tab">
+                                <!--Programa desarrollado por Jorge Alberto Galeano Vélez - 20172020060 José Alejandro Cortazar López - 20181020022
 
                                  Universidad Distrital Francisco Jsoe de Caldas FAcultad de ingenieria  2021  cc-by-nc
-                            --> 
+                            -->
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h3>Coeficiente de correlación lineal</h3>
-                                        <div id="correlationString"></div>
-                                        
                                         <h3>Función lineal de regresión (mx+b)</h3>
                                         <div id="mbString"></div>
                                         <h6 id="eqString"></h6>
-                                        
+
                                         <h3>Pronóstico del promedio para el siguiente intervalo</h3>
                                         <div id="nextMonthString"></div>
+
+                                        <h3>Coeficiente de correlación lineal</h3>
+                                        <div id="correlationString"></div>
                                     </div>
                                     <div class="col-md-6">
                                         <h3>Regresión lineal (mínimos cuadrados)</h3>
